@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 ctx.lineWidth = 0.2;
-// ctx.globalCompositeOperation = "lighten"; //=> watercolour
+ctx.globalCompositeOperation = "lighten"; //=> watercolour
 // ctx.globalCompositeOperation = "destination-over"; //=> reverse
 
 let drawing = false;
@@ -23,7 +23,7 @@ class Root {
     this.angleY = Math.random() * 6.2;
     this.vaY = Math.random() * 0.6 - 0.3; //=> velocity of angle
     this.lightness = 10;
-    this.hue = 0;
+    this.hue = 10;
   }
 
   update() {
