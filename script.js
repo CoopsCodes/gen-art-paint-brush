@@ -115,22 +115,18 @@ window.addEventListener("mouseup", function () {
   drawing = false;
 });
 
-//=> implement touch controls
-// window.addEventListener("touchstart", function (e) {
-//   drawing = true;
-//   if (drawing) {
-//     for (let i = 0; i < 30; i++) {
-//       const root = new Root(e.x, e.y);
-//       root.update();
-//     }
-//   }
-// });
+function positionHandler(e) {
+  e.preventDefault();
+  for (let i = 0; i < 3; i++) {
+    const root = new Root(
+      e.targetTouches[0].clientX,
+      e.targetTouches[0].clientY
+    );
+    root.update();
 
-// window.addEventListener("touchmove", function (e) {
-//   if (e.touches) {
-//     for (let i = 0; i < 30; i++) {
-//       const root = new Root(e.x, e.y);
-//       root.update();
-//     }
-//   }
-// });
+    drawing = false;
+  }
+}
+
+canvas.addEventListener("touchstart", positionHandler, false);
+canvas.addEventListener("touchmove", positionHandler, false);
