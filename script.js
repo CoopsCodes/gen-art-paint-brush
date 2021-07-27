@@ -1,5 +1,6 @@
 /** @type {HTMLCanvasElement} */
 const canvas = document.getElementById("canvas1");
+const button = document.getElementById("button");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -8,6 +9,7 @@ ctx.globalCompositeOperation = "lighten"; //=> watercolour
 // ctx.globalCompositeOperation = "destination-over"; //=> reverse
 
 let drawing = false;
+let clearing = false;
 
 class Root {
   constructor(x, y) {
@@ -93,7 +95,7 @@ class Flower {
 }
 
 window.addEventListener("mousemove", function (e) {
-  if (drawing) {
+  if (drawing && clearing !== true) {
     for (let i = 0; i < 3; i++) {
       const root = new Root(e.x, e.y);
       root.update();
@@ -103,7 +105,7 @@ window.addEventListener("mousemove", function (e) {
 
 window.addEventListener("mousedown", function (e) {
   drawing = true;
-  if (drawing) {
+  if (drawing && clearing !== true) {
     for (let i = 0; i < 30; i++) {
       const root = new Root(e.x, e.y);
       root.update();
@@ -117,16 +119,40 @@ window.addEventListener("mouseup", function () {
 
 function positionHandler(e) {
   e.preventDefault();
-  for (let i = 0; i < 3; i++) {
-    const root = new Root(
-      e.targetTouches[0].clientX,
-      e.targetTouches[0].clientY
-    );
-    root.update();
+  if (clearing !== true) {
+    for (let i = 0; i < 3; i++) {
+      const root = new Root(
+        e.targetTouches[0].clientX,
+        e.targetTouches[0].clientY
+      );
+      root.update();
 
-    drawing = false;
+      drawing = false;
+    }
   }
 }
+
+function clearCanvas(e) {
+  //   e.preventDefault();
+  console.log("YEET");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+button.addEventListener(
+  "mouseenter",
+  function () {
+    clearing = true;
+  },
+  false
+);
+button.addEventListener(
+  "mouseleave",
+  function () {
+    clearing = false;
+  },
+  false
+);
 
 canvas.addEventListener("touchstart", positionHandler, false);
 canvas.addEventListener("touchmove", positionHandler, false);

@@ -10,3 +10,16 @@
   width: 100%;
   background: lightskyblue;
 }
+
+.button {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-style: dashed;
+  border-color: rgb(15, 98, 149);
+  background: none;
+  color: rgb(15, 98, 149);
+  z-index: 10000;
+}
