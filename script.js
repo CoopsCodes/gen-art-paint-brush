@@ -135,6 +135,7 @@ function positionHandler(e) {
 function clearCanvas(e) {
   //   e.preventDefault();
   console.log("YEET");
+  clearing = false;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
